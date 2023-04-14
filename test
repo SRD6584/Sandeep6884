@@ -1,0 +1,18 @@
+**For more detailled documentation please read the [docs](docs) folder!**
+
+This project is intended to setup a vanilla EKS Cluster in AWS including a Tekton based CI Pipeline
+To run it:
+
+- create an aws profile called bpsger (`aws configure --profile bpsger`)
+- install terragrunt and terraform
+- run terragrunt init
+- run terragrunt run-all plan
+- run terragrunt run-all apply
+
+
+When finished applying, configure your kubectl file as follows:
+```
+cd resources/eks/
+aws eks --region $(terraform output -raw region) update-kubeconfig  --name $(terraform output -raw cluster_name) --profile bpsger
+```
+
